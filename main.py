@@ -15,6 +15,13 @@ def normalize_youtube_url(url: str) -> str:
         return f"https://www.youtube.com/watch?v={video_id}"
     return url
 
+@app.get("/health", tags=["Health"])
+def health_check():
+    return {
+        "status": "ok",
+        "service": "YouTube Stream API"
+    }
+
 
 @app.get("/stream")
 def stream_youtube_video(
@@ -87,3 +94,4 @@ def download_youtube_audio(
             status_code=500,
             detail=f"Error downloading audio: {str(e)}"
         )
+
